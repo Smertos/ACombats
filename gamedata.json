@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "type": "chestplate",
+      "name": "Shiva's Shell",
+      "stats": {
+        "armor": 20,
+        "health": 350
+      }
+    },
+    {
+      "id": 2,
+      "type": "head",
+      "name": "Soccer Helm",
+      "stats": {
+        "armor": 4,
+        "health": 60
+      }
+    },
+    {
+      "id": 3,
+      "type": "head",
+      "name": "Bandana",
+      "stats": {
+        "health": 20
+      }
+    }
+  ]
+
+}
+

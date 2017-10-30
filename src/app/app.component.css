@@ -1,0 +1,59 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.links {
+  display: flex;
+  justify-content: start;
+  flex-grow: 1;
+
+  list-style-type: none;
+  
+  margin: 0;
+  padding: 0;
+}
+
+.links > li {
+
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+.links > li:hover > a {
+  border-bottom: 2px solid lightblue;
+}
+
+.link {
+  display: block;
+
+  margin: 0.5em 1.5em;
+  padding: 0 0.5em;
+
+  text-decoration: none;
+
+  color: #222;
+}
+
+.gold {
+  display: flex;
+  justify-content: center;
+
+  margin-right: 5em;
+}
+
+.gold > img {
+  height: 1.5em;
+
+  margin: 0.75em 0;
+}
+
+.gold > span {
+  font-size: calc(1.5em - 4px);
+  font-weight: 700;
+
+  line-height: 2.5em;
+
+  color: #222;
+}
