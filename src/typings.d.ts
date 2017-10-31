@@ -1,8 +1,8 @@
 /* SystemJS module definition */
-declare var module: NodeModule;
+declare var module: NodeModule
 
 interface NodeModule {
-  id: string;
+  id: string
 }
 
 /* JSON module definition */
@@ -10,3 +10,5 @@ declare module "*.json" {
   const _: any
   export default _
 }
+
+declare var require: any

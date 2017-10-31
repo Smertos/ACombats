@@ -4,16 +4,16 @@ export enum ItemType {
   Gloves,
   Pants,
   Boots,
-  Jewelry,
+  Necklace,
   Ring,
   Weapon
 }
 
 export interface ItemArmorStats {
   head?: number,
-  body?: number,
+  chest?: number,
+  belt?: number,
   legs?: number,
-  boots?: number
 }
 
 export interface ItemStats {
@@ -26,5 +26,6 @@ export interface Item {
   name: string,
   'type': ItemType,
   stats: ItemStats,  
-  durability: number
+  durability: number,
+  price: number
 }

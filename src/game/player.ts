@@ -1,20 +1,43 @@
 import Inventory from './player'
+//import * as gamedata from '../../gamedata.json'
+
+const {
+  baseHealth, baseArmor,
+  healthPerLevel, expirienceBase,
+  expirienceScaleFactor, levelCap
+} = require('../../gamedata.json')
 
 export class Player {
 
   inventory: Inventory = new Inventory()
-  baseHealth: number = 50
-  armor = {
-    head: 4,
-    body: 6,
-    legs: 4,
-    boots: 2
+  health: number = baseHealth
+  level: number = 1
+  expirience: number = 0
+
+  constructor (private name: string = 'Anon') {
+    this.calculateHealth()
   }
 
-  constructor (private name: string = 'Anon') { }
+  getInventory (): Inventory {
+    return this.inventory
+  }
 
-  addItem (itemID: number) {
-    this.inventory.addItem(itemID)
+  calculateHealth () {
+    this.health = baseHealth + (healthPerLevel * this.level)
+  }
+
+  calculateLevel () {
+    this.level = Math.log(this.expirience / expirienceBase) / Math.log(expirienceScaleFactor)
+  }
+
+  addExpirience (amount: number) {
+   this.expirience = Math.min(this.expirience + amount, expirienceBase * Math.pow(expirienceScaleFactor, levelCap)) 
+  }
+
+  levelUp (amount: number = 1) {
+    this.expirience += (Math.pow(expirienceScaleFactor, this.level + amount) - this.expirience)
+    this.calculateLevel()
+    this.calculateHealth()
   }
 
 }

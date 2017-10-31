@@ -1,4 +1,19 @@
 {
+  "baseHealth": 50,
+  "baseArmor": {
+    "head": 4,
+    "chest": 8,
+    "belt": 3,
+    "legs": 5
+  },
+
+  "healthPerLevel": 12,
+
+  "expirienceBase": 100,
+  "expirienceScaleFactor": 1.4,
+  "levelCap": 20,
+
+  "itemSellRate": 0.6,
   "items": [
     {
       "id": 1,
@@ -7,7 +22,8 @@
       "stats": {
         "armor": 20,
         "health": 350
-      }
+      },
+      "price": 115
     },
     {
       "id": 2,
@@ -16,7 +32,8 @@
       "stats": {
         "armor": 4,
         "health": 60
-      }
+      },
+      "price": 60
     },
     {
       "id": 3,
@@ -24,7 +41,8 @@
       "name": "Bandana",
       "stats": {
         "health": 20
-      }
+      },
+      "price": 40
     }
   ]
 
