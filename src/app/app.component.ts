@@ -1,4 +1,6 @@
 import { Component } from '@angular/core'
+import { GameService } from '../injectables/game.service'
+import { Player } from '../game/player'
 
 @Component({
   selector: 'app-root',
@@ -13,4 +15,12 @@ export class AppComponent {
   ]
 
   gold = 5
+
+  player: Player
+
+  constructor (private game: GameService) {}
+
+  onUsernameSelect(username: string) {
+    this.player = this.game.getPlayer(username)
+  }
 }

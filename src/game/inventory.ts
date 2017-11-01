@@ -5,7 +5,7 @@ const goldLimit = 50000
 
 export class Inventory {
 
-  constructor (private items: Item[], private gold: number = 100) {}
+  constructor (private items: Item[] = [], private gold: number = 100) {}
 
   getItems (): Item[] {
     return this.items    

@@ -6,7 +6,12 @@
   </ul>
   <div class="gold">
     <img src="assets/gold.png" alt="Little gold stack icon">
-    <span>{{ gold }}</span>
+    <span>{{ gold || "0" }}</span>
   </div>
 </div>
-<router-outlet><router-outlet>
+<router-outlet [hidden]="player === void 0"><router-outlet>
+<div class="login">
+  <label>Enter Username:</label>
+  <input #username />
+  <button (click)="onUsernameSelect(username.value)">Use</button>
+</div>

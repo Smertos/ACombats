@@ -1,5 +1,5 @@
-import Inventory from './player'
-//import * as gamedata from '../../gamedata.json'
+import { Inventory } from './inventory'
+import { PlayerStats } from './interfaces/player-stats'
 
 const {
   baseHealth, baseArmor,
@@ -13,6 +13,12 @@ export class Player {
   health: number = baseHealth
   level: number = 1
   expirience: number = 0
+  stats: PlayerStats = {
+    strength: 0,
+    agility: 0,
+    intelligence: 0,
+    stamina: 0
+  }
 
   constructor (private name: string = 'Anon') {
     this.calculateHealth()
@@ -22,12 +28,16 @@ export class Player {
     return this.inventory
   }
 
-  calculateHealth () {
+  calculateHealth (): number {
     this.health = baseHealth + (healthPerLevel * this.level)
+
+    return this.health
   }
 
-  calculateLevel () {
+  calculateLevel (): number {
     this.level = Math.log(this.expirience / expirienceBase) / Math.log(expirienceScaleFactor)
+
+    return this.level
   }
 
   addExpirience (amount: number) {

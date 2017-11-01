@@ -13,6 +13,8 @@
   "expirienceScaleFactor": 1.4,
   "levelCap": 20,
 
+  "enemyName": "Dummy",
+
   "itemSellRate": 0.6,
   "items": [
     {
