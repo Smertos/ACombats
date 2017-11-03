@@ -1,8 +1,10 @@
 import { Item, ItemType } from './interfaces/item'
 import { Player } from './player'
 import { Inventory } from './inventory'
+import { SHA256 } from 'crypto-js'
+import nanoid from 'nanoid'
 
-const { items } = require('../../gamedata.json')
+const { itemSellRate, items } = require('../../gamedata.json')
 
 export class Shop {
   
@@ -10,12 +12,26 @@ export class Shop {
     let inventory = player.getInventory()
 
     if (inventory.removeGold(item.price)) {
-      inventory.addItem(Object.assign({ unique: Symbol() }, item))
+      inventory.addItem(Object.assign({ 
+        uid: nanoid(),
+        color: SHA256(name).toString().slice(0, 6)
+      }, item))
 
       return true
     }
     
     return false
+  }
+
+  getSellPrice (item: Item): number {
+    return Math.round(item.price * itemSellRate)
+  }
+
+  sellItem (inventory: Inventory, item: Item) {
+    let price = this.getSellPrice(item)
+
+    inventory.removeItem(item.uid)
+    inventory.addGold(price)
   }
 
   getItems (): Item[] {

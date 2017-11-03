@@ -13,6 +13,7 @@ export class Player {
   health: number = baseHealth
   level: number = 1
   expirience: number = 0
+ 
   stats: PlayerStats = {
     strength: 0,
     agility: 0,

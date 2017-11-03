@@ -1,0 +1,35 @@
+.player {
+  display: flex;
+
+  width: 16rem;
+  height: 16rem;
+
+  text-align: center;
+}
+
+.column-left,
+.column-right {
+  width: 4rem;
+}
+
+.column-center {
+  display: flex;
+  flex-direction: column;
+
+  width: 8rem;
+}
+
+.column-center img {
+  flex-grow: 1;
+}
+
+.column-center * {
+  width: 8rem;
+}
+
+.slot {
+  width: 4rem;
+  height: 4rem;
+
+  background-color: lightcoral;
+}

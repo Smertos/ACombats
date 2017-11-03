@@ -1,4 +1,14 @@
-wanna buy something, sweatie?
-<ul>
-  <li *ngFor="let item of shop.getItems()">{{ item.name }}</li>
-</ul>
+<p class="title">Shop</p>
+
+<table class="price-list">
+  <tr>
+    <th>Name</th>
+    <th><img src="assets/gold.png" alt="Gold"></th>
+    <th style="border: 0;"></th>
+  </tr>
+  <tr *ngFor="let item of game.getShop().getItems()">
+    <td><span class="item-name">{{ item.name }}</span></td>
+    <td><span class="item-price">{{ item.price }}g</span></td>
+    <td><button class="item-buy" (click)="onBuy(item)">Buy</button></td>
+  </tr>
+</table>

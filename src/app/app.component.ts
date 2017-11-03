@@ -14,13 +14,12 @@ export class AppComponent {
     { name: 'Shop',      url: '/shop'     }
   ]
 
-  gold = 5
-
   player: Player
 
   constructor (private game: GameService) {}
 
   onUsernameSelect(username: string) {
+    this.game.selectPlayer(username)
     this.player = this.game.getPlayer(username)
   }
 }

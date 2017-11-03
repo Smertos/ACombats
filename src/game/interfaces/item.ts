@@ -1,12 +1,12 @@
 export enum ItemType {
-  Head,
-  Chestplate,
-  Gloves,
-  Pants,
-  Boots,
-  Necklace,
-  Ring,
-  Weapon
+  Head = 'head',
+  Chestplate = 'chestplate',
+  Gloves = 'gloves',
+  Pants = 'pants',
+  Boots = 'boots',
+  Necklace = 'necklace',
+  Ring = 'ring',
+  Weapon = 'weapon'
 }
 
 export interface ItemArmorStats {
@@ -23,9 +23,12 @@ export interface ItemStats {
 }
 
 export interface Item {
+  id: number,
+  uid?: string,
   name: string,
   'type': ItemType,
   stats: ItemStats,  
   durability: number,
-  price: number
+  price: number,
+  color?: string  
 }

@@ -1,0 +1,16 @@
+.price-list,
+.price-list td,
+.price-list th {
+  border-collapse: collapse;
+}
+
+.price-list td,
+.price-list th {
+  padding: 10px;
+  
+  border: 1px solid #222;
+}
+
+.price-list {
+  margin: 0 auto;
+}

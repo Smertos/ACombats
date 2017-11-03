@@ -1,1 +1,21 @@
-this is the inventory
+<p class="title">Inventory</p>
+
+<player [player]="player"></player>
+
+<table class="item-list">
+  <tr class="item">
+    <th>Item Name</th>
+    <th>Sell Price</th>
+  </tr>
+  <tr class="item" *ngFor="let item of player.getInventory().getItems()">
+    <td>{{ item.name }}</td>
+    <td>{{ game.getShop().getSellPrice(item) }}</td>
+    <td>
+      <button (click)="onWear(item)">Wear {{ item.type === 'ring' ? '(Left)': '' }}</button>
+      <button (click)="onWear(item, true)" *ngIf="item.type === 'ring'">Wear (Right)</button>
+    </td>
+    <td>
+      <button (click)="onSell(item)">Sell</button>
+    </td>
+  </tr>
+</table>

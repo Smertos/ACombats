@@ -16,3 +16,11 @@ body, app-root {
 app-root {
   font-family: 'PT Sans', sans-serif;
 }
+
+.title {
+  margin: 1em auto;
+  text-align: center;
+  font-weight: 700;
+  font-size: 2em;
+}
+

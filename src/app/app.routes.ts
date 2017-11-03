@@ -1,25 +1,25 @@
-import { Routes}  from '@angular/router'
+import { Routes }  from '@angular/router'
 
 import { FightComponent }     from '../components/fight/fight.component'
 import { InventoryComponent } from '../components/inventory/inventory.component'
 import { ShopComponent }      from '../components/shop/shop.component'
-import { SimpleCanActivate }  from '../injectables/simple-can-activate'
+import { LoggedInGuard }  from '../injectables/logged-in-guard'
 
 export const appRoutes: Routes = [
   {
     path: 'fight',
     component: FightComponent,
-    canActivate: [CanActivate]
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'backpack',
     component: InventoryComponent,
-    canActivate: [CanActivate]
+    canActivate: [LoggedInGuard]
   },
   {
     path: 'shop',
-    component: ShopComponent
-    canActivate: [CanActivate]
+    component: ShopComponent,
+    canActivate: [LoggedInGuard]
   },
   {
     path: '',

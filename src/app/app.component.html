@@ -1,16 +1,16 @@
 <div class="navbar">
   <ul class="links">
     <li *ngFor="let link of links">
-      <a class="link" href="{{ link.url }}">{{ link.name }}</a>
+      <a class="link" routerLink="{{ link.url }}" routerLinkActive="active">{{ link.name }}</a>
     </li>
   </ul>
   <div class="gold">
-    <img src="assets/gold.png" alt="Little gold stack icon">
-    <span>{{ gold || "0" }}</span>
+    <img src="assets/gold.png" alt="Gold">
+    <span>{{ player?.getInventory()?.getGold() || "0" }}</span>
   </div>
 </div>
-<router-outlet [hidden]="player === void 0"><router-outlet>
-<div class="login">
+<router-outlet><router-outlet>
+<div class="login" *ngIf="!player">
   <label>Enter Username:</label>
   <input #username />
   <button (click)="onUsernameSelect(username.value)">Use</button>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core'
 import { Shop } from '../../game/shop'
+import { Item } from '../../game/interfaces/item'
+import { GameService } from '../../injectables/game.service'
 
 @Component({
   selector: 'shop',
@@ -8,5 +10,16 @@ import { Shop } from '../../game/shop'
 })
 export class ShopComponent {
 
-  shop: Shop = new Shop()
+  constructor (public game: GameService) {}
+
+  onBuy (item: Item) {
+    const shop: Shop = this.game.getShop()
+    
+    if (!shop.buy(this.game.getSelectedPlayer(), item)) {
+      alert(`Can't buy ${item.name}: Not enough gold`)  
+    } else {
+      this.game.save()
+    }
+  }
+
 }

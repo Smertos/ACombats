@@ -57,3 +57,14 @@
 
   color: #222;
 }
+
+.login {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 6em;
+}
+
+.login * {
+  margin-bottom: 0.25em;
+}

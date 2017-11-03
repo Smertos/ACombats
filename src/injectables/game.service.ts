@@ -5,6 +5,8 @@ import { Player } from '../game/player'
 import { Inventory } from '../game/inventory'
 import { Item } from '../game/interfaces/item'
 
+import { plainToClass } from 'class-transformer'
+
 const localStorageKeyName = 'gamedata'
 const { items: Items, enemyName } = require('../../gamedata.json')
 
@@ -12,11 +14,29 @@ const { items: Items, enemyName } = require('../../gamedata.json')
 export class GameService {
 
   items = Items
-  players: {}
+  players = {}
+  selectedPlayer: string
   shop: Shop = new Shop()
 
   constructor () {
-    this.players[enemyName] = new Player(enemyName)
+    this.load()
+
+    if (!this.players[enemyName]) {
+      this.players[enemyName] = new Player(enemyName)
+    }
+  }
+  
+  // Player interactions
+  selectPlayer (name: string) {
+    this.selectedPlayer = name
+  }
+
+  isPlayerSelected (): boolean {
+    return this.selectedPlayer !== void 0
+  }
+
+  getSelectedPlayer (): Player {
+    return this.getPlayer(this.selectedPlayer)
   }
 
   getPlayer (name: string): Player {
@@ -27,13 +47,25 @@ export class GameService {
     return this.players[name]
   }
 
+  // Shop stuff
+  getShop (): Shop {
+    return this.shop
+  }
+
+  // Loading & Saving
   load () {
     if (!localStorage.hasOwnProperty(localStorageKeyName)) {
       this.save()
     } else {
-      let state = JSON.parse(localStorage.getItem(localStorageKeyName))
+      let { players } = JSON.parse(localStorage.getItem(localStorageKeyName))
 
-      this.players = state.players
+      Object.keys(players).forEach(k => {
+        players[k].inventory = plainToClass(Inventory, players[k].inventory)
+
+        this.players[k] = plainToClass(Player, players[k])
+      })
+
+      console.log(this.players)
     }
   }
 
