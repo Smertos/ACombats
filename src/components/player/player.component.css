@@ -27,9 +27,23 @@
   width: 8rem;
 }
 
-.slot {
-  width: 4rem;
-  height: 4rem;
-
-  background-color: lightcoral;
+.column-left slot, 
+.column-right slot {
+  border: 1px solid #222;
+  border-bottom: 0;
 }
+
+.column-left slot:last-child, 
+.column-right slot:last-child {
+  border-bottom: 1px solid #222;
+}
+
+.column-center * {
+  border-top: 1px solid #222;
+}
+
+.column-center *:last-child {
+  border-bottom: 1px solid #222;
+} 
+
+

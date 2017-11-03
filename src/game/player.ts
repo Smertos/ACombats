@@ -4,7 +4,8 @@ import { PlayerStats } from './interfaces/player-stats'
 const {
   baseHealth, baseArmor,
   healthPerLevel, expirienceBase,
-  expirienceScaleFactor, levelCap
+  expirienceScaleFactor, levelCap,
+  unarmedDamage
 } = require('../../gamedata.json')
 
 export class Player {
@@ -21,34 +22,53 @@ export class Player {
     stamina: 0
   }
 
-  constructor (private name: string = 'Anon') {
-    this.calculateHealth()
+  constructor (private name: string = 'Anon', level?: number) {
+    this.updateHealth()
+
+    if (typeof level === 'number' && level > 1) {
+      this.levelUp(level - 1)
+    }
   }
 
   getInventory (): Inventory {
     return this.inventory
   }
 
-  calculateHealth (): number {
+  getHealth (): number { 
+    return this.health
+  }
+
+  getLevel (): number {
+    return this.level
+  }
+  
+  // TODO: Implement multiplication by strength after adding stats
+  getAttackDamage (): number { 
+    return this.getInventory().equipped.weapon.stats.damage || unarmedDamage
+  }
+
+  updateHealth (): number {
     this.health = baseHealth + (healthPerLevel * this.level)
 
     return this.health
   }
 
-  calculateLevel (): number {
-    this.level = Math.log(this.expirience / expirienceBase) / Math.log(expirienceScaleFactor)
+  updateLevel (): number {
+    this.level = Math.log(this.expirience / expirienceBase) / Math.log(expirienceScaleFactor) + 1
 
     return this.level
   }
 
   addExpirience (amount: number) {
-   this.expirience = Math.min(this.expirience + amount, expirienceBase * Math.pow(expirienceScaleFactor, levelCap)) 
+    this.expirience = Math.min(this.expirience + amount, expirienceBase * Math.pow(expirienceScaleFactor, levelCap))
+    this.updateLevel()
   }
 
   levelUp (amount: number = 1) {
-    this.expirience += (Math.pow(expirienceScaleFactor, this.level + amount) - this.expirience)
-    this.calculateLevel()
-    this.calculateHealth()
+    this.expirience = expirienceBase * Math.pow(expirienceScaleFactor, this.level + amount - 1)
+
+    this.updateLevel()
+    this.updateHealth()
   }
 
 }

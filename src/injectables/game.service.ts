@@ -8,7 +8,7 @@ import { Item } from '../game/interfaces/item'
 import { plainToClass } from 'class-transformer'
 
 const localStorageKeyName = 'gamedata'
-const { items: Items, enemyName } = require('../../gamedata.json')
+const { items: Items } = require('../../gamedata.json')
 
 @Injectable()
 export class GameService {
@@ -20,10 +20,6 @@ export class GameService {
 
   constructor () {
     this.load()
-
-    if (!this.players[enemyName]) {
-      this.players[enemyName] = new Player(enemyName)
-    }
   }
   
   // Player interactions

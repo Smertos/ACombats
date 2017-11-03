@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
-import { Location, HashLocationStrategy, LocationStrategy } from '@angular/common'
+import { CommonModule, Location, HashLocationStrategy, LocationStrategy } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 
@@ -9,6 +9,7 @@ import { FightComponent }     from '../components/fight/fight.component'
 import { InventoryComponent } from '../components/inventory/inventory.component'
 import { PlayerComponent } from '../components/player/player.component'
 import { ShopComponent }      from '../components/shop/shop.component'
+import { SlotComponent }      from '../components/slot/slot.component'
 
 import { appRoutes } from './app.routes'
 
@@ -21,10 +22,13 @@ import { GameService } from '../injectables/game.service'
     FightComponent,
     InventoryComponent,
     PlayerComponent,
-    ShopComponent
+    ShopComponent,
+    SlotComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }

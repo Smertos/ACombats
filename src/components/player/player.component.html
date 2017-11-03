@@ -1,20 +1,20 @@
 <div class="player">
   <div class="column-left">
-    <div class="slot slot-head">{{ equipped.head?.name }}</div>
-    <div class="slot slot-body">{{ equipped.body?.name }}</div>
-    <div class="slot slot-pants">{{ equipped.pants?.name }}</div>
-    <div class="slot slot-left-ring">{{ equipped.leftRing?.name }}</div>
+    <slot [item]="equipped.head" placeholder="Helmet"></slot>
+    <slot [item]="equipped.body" placeholder="Chestplate"></slot>
+    <slot [item]="equipped.pants" placeholder="Pants"></slot>
+    <slot [item]="equipped.leftRing" placeholder="Ring"></slot>
   </div>
 
   <div class="column-center">
-    <img src="player.png" alt="Player">
-    <div class="slot slot-weapon">{{ equipped.weapon?.name }}</div>
+    <img src="assets/player.png" alt="Player">
+    <slot [item]="equipped.weapon" placeholder="Weapon"></slot>
   </div>
 
   <div class="column-right">
-    <div class="slot slot-necklace">{{ equipped.necklace?.name }}</div>
-    <div class="slot slot-gloves">{{ equipped.gloves?.name }}</div>
-    <div class="slot slot-boots">{{ equipped.boots?.name }}</div>
-    <div class="slot slot-right-ring">{{ equipped.rightRing?.name }}</div>
+    <slot [item]="equipped.necklace" placeholder="Necklace"></slot>
+    <slot [item]="equipped.gloves" placeholder="Gloves"></slot>
+    <slot [item]="equipped.boots" placeholder="Boots"></slot>
+    <slot [item]="equipped.rightRing" placeholder="Ring"></slot>
   </div>
 </div>

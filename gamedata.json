@@ -14,6 +14,7 @@
   "levelCap": 20,
 
   "enemyName": "Dummy",
+  "unarmedDamege": 5,
 
   "itemSellRate": 0.6,
   "items": [
