@@ -1,17 +1,29 @@
+.player-info {
+  display: flex;
+  justify-content: space-around;
+
+  padding: 0 4em;
+}
+
+.statistics td {
+  padding: 0.25em 0.5em;
+
+  text-align: center;
+}
+
 .item-list {
   padding: 0;
   margin: 1em 4em;
-  list-style-type: none;
+
+  border-collapse: collapse;
 }
 
-.item {
+.item-list th,
+.item-list td {
   padding: 0.5em 1em;
 
   border: 1px solid #222;
-  border-bottom: 0;
-}
 
-.item:last-child {
-  border-bottom: 1px solid #222;
+  text-align: center;
 }
 

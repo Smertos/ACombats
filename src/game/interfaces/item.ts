@@ -1,26 +1,5 @@
-export enum ItemType {
-  Head = 'head',
-  Chestplate = 'chestplate',
-  Gloves = 'gloves',
-  Pants = 'pants',
-  Boots = 'boots',
-  Necklace = 'necklace',
-  Ring = 'ring',
-  Weapon = 'weapon'
-}
-
-export interface ItemArmorStats {
-  head?: number,
-  chest?: number,
-  belt?: number,
-  legs?: number,
-}
-
-export interface ItemStats {
-  health?: number,
-  armor?: ItemArmorStats,
-  damage?: number
-}
+import { ItemType } from '../enums/item-type'
+import { ItemStats } from './item-stats'
 
 export interface Item {
   id: number,

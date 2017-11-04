@@ -1,0 +1,20 @@
+
+
+.fight {
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  justify-content: center;
+
+  width: 12em;
+}
+
+.actions input[type=submit] {
+  grid-column-start: 1;
+  grid-column-end: span 2;
+}

@@ -6,8 +6,6 @@
   height: 4rem;
 
   word-break: break-all;
-
-  background-color: lightsalmon;
 }
 
 .slot-placeholder {
@@ -16,6 +14,4 @@
 
 .slot-item-name {
   font-weight: 700;
-
-  color: white;
 }

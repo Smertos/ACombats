@@ -13,6 +13,9 @@
   "expirienceScaleFactor": 1.4,
   "levelCap": 20,
 
+  "statPointsInitial": 5,
+  "statPointsPerLevel": 3,
+
   "enemyName": "Dummy",
   "unarmedDamege": 5,
 

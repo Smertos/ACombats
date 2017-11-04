@@ -1,0 +1,21 @@
+.bar {
+  border: 1px solid #222;
+}
+
+.bar p {
+  position: absolute;
+
+  width: calc(16em - 4px);
+
+  margin: 0;
+
+  text-align: center;
+
+  color: white;
+}
+
+.progress {
+  height: calc(2em - 2px);
+
+  background-color: darkgreen;
+}

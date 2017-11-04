@@ -1,4 +1,5 @@
-import { Item, ItemType } from './interfaces/item'
+import { Item } from './interfaces/item'
+import { ItemType } from './enums/item-type'
 import { Equipped } from './interfaces/equipped'
 
 const inventorySizeLimit = 50

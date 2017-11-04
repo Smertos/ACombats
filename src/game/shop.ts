@@ -1,4 +1,5 @@
-import { Item, ItemType } from './interfaces/item'
+import { Item } from './interfaces/item'
+import { ItemType } from './enums/item-type'
 import { Player } from './player'
 import { Inventory } from './inventory'
 import { SHA256 } from 'crypto-js'

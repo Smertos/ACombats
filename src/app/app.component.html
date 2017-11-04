@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar" *ngIf="player">
   <ul class="links">
     <li *ngFor="let link of links">
       <a class="link" routerLink="{{ link.url }}" routerLinkActive="active">{{ link.name }}</a>
@@ -6,12 +6,15 @@
   </ul>
   <div class="gold">
     <img src="assets/gold.png" alt="Gold">
-    <span>{{ player?.getInventory()?.getGold() || "0" }}</span>
+    <span>{{ player.getInventory()?.getGold() || "0" }}</span>
   </div>
 </div>
+
 <router-outlet><router-outlet>
-<div class="login" *ngIf="!player">
-  <label>Enter Username:</label>
-  <input #username />
-  <button (click)="onUsernameSelect(username.value)">Use</button>
-</div>
+
+<form class="login" *ngIf="!player" (submit)="onUsernameSelect(username.value)">
+  <label>Challenger, name yourself:</label>
+  <input #username type="text" placeholder="Player Name" />
+
+  <input type="submit" value="Play">
+</form>

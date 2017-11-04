@@ -1,20 +1,27 @@
 <div class="player">
-  <div class="column-left">
-    <slot [item]="equipped.head" placeholder="Helmet"></slot>
-    <slot [item]="equipped.body" placeholder="Chestplate"></slot>
-    <slot [item]="equipped.pants" placeholder="Pants"></slot>
-    <slot [item]="equipped.leftRing" placeholder="Ring"></slot>
-  </div>
 
-  <div class="column-center">
-    <img src="assets/player.png" alt="Player">
-    <slot [item]="equipped.weapon" placeholder="Weapon"></slot>
-  </div>
+  <p class="name">{{ player.name }}</p>
 
-  <div class="column-right">
-    <slot [item]="equipped.necklace" placeholder="Necklace"></slot>
-    <slot [item]="equipped.gloves" placeholder="Gloves"></slot>
-    <slot [item]="equipped.boots" placeholder="Boots"></slot>
-    <slot [item]="equipped.rightRing" placeholder="Ring"></slot>
+  <health-bar [player]="player"></health-bar>
+
+  <div class="inventory">
+    <div class="column-left">
+      <slot [item]="equipped.head" placeholder="Helmet"></slot>
+      <slot [item]="equipped.body" placeholder="Chestplate"></slot>
+      <slot [item]="equipped.pants" placeholder="Pants"></slot>
+      <slot [item]="equipped.leftRing" placeholder="Ring"></slot>
+    </div>
+
+    <div class="column-center">
+      <img src="assets/player.png" alt="Player">
+      <slot [item]="equipped.weapon" placeholder="Weapon"></slot>
+    </div>
+
+    <div class="column-right">
+      <slot [item]="equipped.necklace" placeholder="Necklace"></slot>
+      <slot [item]="equipped.gloves" placeholder="Gloves"></slot>
+      <slot [item]="equipped.boots" placeholder="Boots"></slot>
+      <slot [item]="equipped.rightRing" placeholder="Ring"></slot>
+    </div>
   </div>
 </div>

@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component'
 import { FightComponent }     from '../components/fight/fight.component'
 import { InventoryComponent } from '../components/inventory/inventory.component'
+import { HealthBarComponent } from '../components/health-bar/health-bar.component'
 import { PlayerComponent } from '../components/player/player.component'
 import { ShopComponent }      from '../components/shop/shop.component'
 import { SlotComponent }      from '../components/slot/slot.component'
@@ -20,6 +21,7 @@ import { GameService } from '../injectables/game.service'
   declarations: [
     AppComponent,
     FightComponent,
+    HealthBarComponent,
     InventoryComponent,
     PlayerComponent,
     ShopComponent,
@@ -31,7 +33,7 @@ import { GameService } from '../injectables/game.service'
     FormsModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }
+      { enableTracing: false }
     )
   ],
   providers: [

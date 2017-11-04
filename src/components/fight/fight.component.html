@@ -1,9 +1,55 @@
 <p class="title">Fight</p>
-<player player="player"></player>
 
-<div class="actions">
-  <div class="column-attack"></div>   
-  <div class="column-defence"></div>   
+<div class="fight">
+  <player [player]="player"></player>
+
+  <form class="actions" (submit)="onSubmit()">
+    <div class="column-attack">
+      <p>Attack:</p>
+
+      <div *ngFor="let part of bodyParts">
+        <input type="radio" name="attack" value="{{ part.toLowerCase() }}">
+        <label>{{ part }}</label>
+      </div>
+
+      <!--<input type="radio" name="attack" value="head">
+      <label>Head</label>
+
+      <input type="radio" name="attack" value="body">
+      <label>Body</label>
+
+      <input type="radio" name="attack" value="waist">
+      <label>Waist</label>
+
+      <input type="radio" name="attack" value="legs">
+      <label>Legs</label>-->
+
+    </div>
+
+    <div class="column-defence">
+      <p>Defend:</p>
+
+      <div *ngFor="let part of bodyParts">
+        <input type="radio" name="defend" value="{{ part.toLowerCase() }}">
+        <label>{{ part }}</label>
+      </div>
+
+      <!--<input type="radio" name="defend" value="head">
+      <label>Head</label>
+
+      <input type="radio" name="defend" value="body">
+      <label>Body</label>
+
+      <input type="radio" name="defend" value="waist">
+      <label>Waist</label>
+
+      <input type="radio" name="defend" value="legs">
+      <label>Legs</label>-->
+
+    </div>
+
+    <input type="submit" value="Make a turn">
+  </form>
+
+  <player [player]="enemy"></player>
 </div>
-
-<player player="enemy"></player>

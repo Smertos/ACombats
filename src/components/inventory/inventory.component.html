@@ -1,13 +1,26 @@
 <p class="title">Inventory</p>
 
-<player [player]="player"></player>
+<div class="player-info">
+  <player [player]="player"></player>
+
+  <table class="statistics">
+    <tr class="stat" *ngFor="let i of [0, 1, 2, 3]">
+      <td>{{ Statistic[i] }}</td>
+      <td>{{ player.statistics[Statistic[i].toLowerCase()] }}</td>
+      <td><button (click)="onUpgradeStatistic(i)">+</button></td>
+    </tr>    
+    <tr>
+      <td>Unspent points: {{ player.getUnspentPoints() }}</td>
+    </tr>
+  </table>
+</div>
 
 <table class="item-list">
-  <tr class="item">
+  <tr>
     <th>Item Name</th>
     <th>Sell Price</th>
   </tr>
-  <tr class="item" *ngFor="let item of player.getInventory().getItems()">
+  <tr *ngFor="let item of player.getInventory().getItems()">
     <td>{{ item.name }}</td>
     <td>{{ game.getShop().getSellPrice(item) }}</td>
     <td>

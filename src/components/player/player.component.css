@@ -1,4 +1,16 @@
 .player {
+  width: 16rem;  
+}
+
+.name {
+  margin: 0;
+
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.25em;
+}
+
+.inventory {
   display: flex;
 
   width: 16rem;
