@@ -1,5 +1,5 @@
 export enum ItemType {
-  Head = 'head',
+  Helmet = 'helmet',
   Chestplate = 'chestplate',
   Gloves = 'gloves',
   Pants = 'pants',

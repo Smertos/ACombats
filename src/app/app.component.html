@@ -5,8 +5,9 @@
     </li>
   </ul>
   <div class="gold">
-    <img src="assets/gold.png" alt="Gold">
+    <img src="assets/gold.png" alt="Gold" (click)="cheatsOn = !cheatsOn">
     <span>{{ player.getInventory()?.getGold() || "0" }}</span>
+    <button (click)="player.getInventory().addGold(100)" *ngIf="cheatsOn">+</button>
   </div>
 </div>
 

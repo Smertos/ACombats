@@ -1,13 +1,13 @@
 <div class="player">
 
-  <p class="name">{{ player.name }}</p>
+  <p class="name">{{ player.name }} [{{ player.getLevel() }}]</p>
 
   <health-bar [player]="player"></health-bar>
 
   <div class="inventory">
     <div class="column-left">
-      <slot [item]="equipped.head" placeholder="Helmet"></slot>
-      <slot [item]="equipped.body" placeholder="Chestplate"></slot>
+      <slot [item]="equipped.helmet" placeholder="Helmet"></slot>
+      <slot [item]="equipped.chestplate" placeholder="Chestplate"></slot>
       <slot [item]="equipped.pants" placeholder="Pants"></slot>
       <slot [item]="equipped.leftRing" placeholder="Ring"></slot>
     </div>

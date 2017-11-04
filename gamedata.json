@@ -33,7 +33,7 @@
     },
     {
       "id": 2,
-      "type": "head",
+      "type": "helmet",
       "name": "Soccer Helm",
       "stats": {
         "armor": 4,
@@ -43,7 +43,7 @@
     },
     {
       "id": 3,
-      "type": "head",
+      "type": "helmet",
       "name": "Bandana",
       "stats": {
         "health": 20

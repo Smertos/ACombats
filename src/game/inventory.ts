@@ -75,6 +75,8 @@ export class Inventory {
         this.equipped[item['type']] = item 
       }
     }
+
+    this.removeItem(item.uid)
   }
 
 }

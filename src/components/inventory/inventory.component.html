@@ -22,7 +22,7 @@
   </tr>
   <tr *ngFor="let item of player.getInventory().getItems()">
     <td>{{ item.name }}</td>
-    <td>{{ game.getShop().getSellPrice(item) }}</td>
+    <td>{{ game.getShop().getSellPrice(item) }}g</td>
     <td>
       <button (click)="onWear(item)">Wear {{ item.type === 'ring' ? '(Left)': '' }}</button>
       <button (click)="onWear(item, true)" *ngIf="item.type === 'ring'">Wear (Right)</button>

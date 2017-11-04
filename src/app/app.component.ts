@@ -16,6 +16,7 @@ export class AppComponent {
   ]
 
   player: Player
+  cheatsOn: boolean = false
 
   constructor (private game: GameService, private router: Router) {
     document.addEventListener('keyup', (event: KeyboardEvent) => {
@@ -40,4 +41,5 @@ export class AppComponent {
     this.game.selectPlayer(username)
     this.player = this.game.getPlayer(username)
   }
+
 }
