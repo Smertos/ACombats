@@ -76,7 +76,7 @@ export class Player {
       this.getInventory().equipped.weapon ?
       this.getInventory().equipped.weapon.stats.damage
       : unarmedDamage
-    ) * Math.log10(this.statistics.damage + 9)
+    ) * Math.log10(this.statistics.damage + 9) * (this.level / 10)
   }
 
   getDefenceForPart(part: BodyPart): number {
@@ -158,7 +158,7 @@ export class Player {
   }
 
   levelUp (amount: number = 1): void {
-    this.expirience = expirienceBase * Math.pow(expirienceScaleFactor, this.level + amount - 2)
+    this.expirience = Math.floor(expirienceBase * Math.pow(expirienceScaleFactor, this.level + amount - 2))
 
     this.updateLevel()
     this.updateHealth()
