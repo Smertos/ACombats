@@ -4,13 +4,35 @@
   <player [player]="player"></player>
 
   <table class="statistics">
-    <tr class="stat" *ngFor="let i of [0, 1, 2, 3]">
-      <td>{{ Statistic[i] }}</td>
-      <td>{{ player.statistics[Statistic[i].toLowerCase()] }}</td>
-      <td><button (click)="onUpgradeStatistic(i)">+</button></td>
+    <tr class="stat">
+      <th>EXP:</th>
+      <td>{{ player.getCurrentExpirience() }} / {{ player.getRequiredExpirience() }}</td>
     </tr>    
+
+    <tr class="stat">
+      <th>Damage:</th>
+      <td>{{ Math.floor(player.getAttackDamage()) }}</td>
+    </tr>    
+
+    <th>Armor</th>
+
+    <tr class="stat" *ngFor="let part of Object.keys(BodyPart)">
+      <td>{{ part }}:</td>
+      <td>{{ Math.floor(player.getDefenceForPart(BodyPart[part])) }}</td>
+    </tr>    
+  </table>
+
+  <table class="statistics">
+    <th>Statistics</th>
+    <tr class="stat" *ngFor="let k of Object.keys(Statistic)">
+      <td>{{ k }}:</td>
+      <td>{{ player.statistics[Statistic[k]] }}</td>
+      <td><button (click)="onUpgradeStatistic(Statistic[k])">+</button></td>
+    </tr>    
+
     <tr>
-      <td>Unspent points: {{ player.getUnspentPoints() }}</td>
+      <td>Unspent points:</td>
+      <td>{{ player.getUnspentPoints() }}</td>
     </tr>
   </table>
 </div>
@@ -21,7 +43,7 @@
     <th>Sell Price</th>
   </tr>
   <tr *ngFor="let item of player.getInventory().getItems()">
-    <td>{{ item.name }}</td>
+    <td [item]="item">{{ item.name }}</td>
     <td>{{ game.getShop().getSellPrice(item) }}g</td>
     <td>
       <button (click)="onWear(item)">Wear {{ item.type === 'ring' ? '(Left)': '' }}</button>

@@ -3,6 +3,13 @@ import { Player } from './player'
 
 describe('Player', () => {
 
+  it('should have LVL 1', () => {
+    let player: Player = new Player('TestPlayer')
+
+    expect(player.getLevel()).toBe(1)
+  })
+
+
   it('should level up 1 LVL', () => {
     let player: Player = new Player('TestPlayer')
 

@@ -3,48 +3,24 @@
 <div class="fight">
   <player [player]="player"></player>
 
-  <form class="actions" (submit)="onSubmit()">
+  <form class="actions" (submit)="onSubmit($event)">
     <div class="column-attack">
       <p>Attack:</p>
 
-      <div *ngFor="let part of bodyParts">
-        <input type="radio" name="attack" value="{{ part.toLowerCase() }}">
+      <div *ngFor="let part of Object.keys(BodyPart)">
+        <input type="radio" name="attack" value="{{ part }}" [(ngModel)]="attackPart" />
         <label>{{ part }}</label>
       </div>
-
-      <!--<input type="radio" name="attack" value="head">
-      <label>Head</label>
-
-      <input type="radio" name="attack" value="body">
-      <label>Body</label>
-
-      <input type="radio" name="attack" value="waist">
-      <label>Waist</label>
-
-      <input type="radio" name="attack" value="legs">
-      <label>Legs</label>-->
 
     </div>
 
     <div class="column-defence">
       <p>Defend:</p>
 
-      <div *ngFor="let part of bodyParts">
-        <input type="radio" name="defend" value="{{ part.toLowerCase() }}">
+      <div *ngFor="let part of Object.keys(BodyPart)">
+        <input type="radio" name="defend" value="{{ part }}" [(ngModel)]="defendPart" />
         <label>{{ part }}</label>
       </div>
-
-      <!--<input type="radio" name="defend" value="head">
-      <label>Head</label>
-
-      <input type="radio" name="defend" value="body">
-      <label>Body</label>
-
-      <input type="radio" name="defend" value="waist">
-      <label>Waist</label>
-
-      <input type="radio" name="defend" value="legs">
-      <label>Legs</label>-->
 
     </div>
 

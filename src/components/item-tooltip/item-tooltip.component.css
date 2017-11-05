@@ -1,0 +1,14 @@
+.tooltip {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+
+  padding: 0.25em 0.5em;
+
+  border: 1px solid #222;
+}
+
+.name {
+  font-size: 1.2em;
+  font-weight: 700;
+}

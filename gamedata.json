@@ -8,6 +8,7 @@
   },
 
   "healthPerLevel": 12,
+  "healthPerStatPoint": 4,
 
   "expirienceBase": 100,
   "expirienceScaleFactor": 1.4,
@@ -17,7 +18,8 @@
   "statPointsPerLevel": 3,
 
   "enemyName": "Dummy",
-  "unarmedDamege": 5,
+  "unarmedDamage": 5,
+  "defenceFactor": 0.25,
 
   "itemSellRate": 0.6,
   "items": [
@@ -46,9 +48,48 @@
       "type": "helmet",
       "name": "Bandana",
       "stats": {
+        "armor": 2,
         "health": 20
       },
       "price": 40
+    },
+    {
+      "id": 4,
+      "type": "pants",
+      "name": "Dad's Trousers",
+      "stats": {
+        "armor": 1,
+        "health": 20
+      },
+      "price": 15
+    },
+    {
+      "id": 5,
+      "type": "pants",
+      "name": "LaTeX shorts",
+      "stats": {
+        "armor": 10,
+        "health": 80
+      },
+      "price": 96
+    },
+    {
+      "id": 6,
+      "type": "ring",
+      "name": "Carrot Ring",
+      "stats": {
+        "health": 20
+      },
+      "price": 35
+    },
+    {
+      "id": 7,
+      "type": "weapon",
+      "name": "Big Ass Steel Sword",
+      "stats": {
+        "damage": 35
+      },
+      "price": 75
     }
   ]
 

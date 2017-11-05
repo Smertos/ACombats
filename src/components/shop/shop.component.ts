@@ -10,7 +10,12 @@ import { GameService } from '../../injectables/game.service'
 })
 export class ShopComponent {
 
-  constructor (public game: GameService) {}
+  constructor (public game: GameService) {
+    let player = this.game.getSelectedPlayer()
+
+    player.inFight = false
+    player.updateHealth()
+  }
 
   onBuy (item: Item) {
     const shop: Shop = this.game.getShop()

@@ -11,11 +11,16 @@
 
   text-align: center;
 
-  color: white;
+  color: #a0ff18;
 }
 
 .progress {
   height: calc(2em - 2px);
 
   background-color: darkgreen;
+}
+
+.progress p::after {
+  color: #222;
+  mix-blend-mode: difference;
 }

@@ -62,10 +62,18 @@ export class GameService {
       })
 
       console.log(this.players)
+
+      Object.keys(this.players).forEach(k => {
+        this.players[k].updateHealth()
+        this.players[k].updateLevel()
+      })
     }
   }
 
   save () {
+    this.getSelectedPlayer().updateHealth()
+    this.getSelectedPlayer().updateLevel()
+
     localStorage.setItem(localStorageKeyName, JSON.stringify({
       players: this.players
     }))

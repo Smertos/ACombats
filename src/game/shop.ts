@@ -15,7 +15,7 @@ export class Shop {
     if (inventory.removeGold(item.price)) {
       inventory.addItem(Object.assign({ 
         uid: nanoid(),
-        color: SHA256(name).toString().slice(0, 6)
+        color: SHA256(item.name).toString().slice(0, 6)
       }, item))
 
       return true

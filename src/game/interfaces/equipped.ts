@@ -1,8 +1,8 @@
 import { Item } from './item'
 
 export interface Equipped {
-  head?: Item,
-  body?: Item,
+  helmet?: Item,
+  chestplate?: Item,
   pants?: Item,
   boots?: Item,
   necklace?: Item,

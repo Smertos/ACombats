@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { GameService } from '../../injectables/game.service'
 import { Player } from '../../game/player'
 import { Item } from '../../game/interfaces/item'
+import { BodyPart } from '../../game/enums/body-part'
 import { Statistic } from '../../game/enums/statistic'
 
 @Component({
@@ -13,20 +14,26 @@ export class InventoryComponent {
 
   player: Player
 
-  // Hack that allows HTML tempalate to see this enum
+  // Hack that allows HTML tempalate to see objects out of class' scope
+  Math = Math
+  Object = Object
+  BodyPart = BodyPart
   Statistic = Statistic
 
   constructor (private game: GameService) {
     this.player = this.game.getSelectedPlayer()
+
+    this.player.inFight = false
+    this.player.updateHealth()
   }
   
-  onUpgradeStatistic (i: number) {
-    this.player.upgradeStatistic(i)
+  onUpgradeStatistic (stat: Statistic) {
+    this.player.upgradeStatistic(stat)
     this.game.save()
   }
 
-  onWear (item: Item, left: boolean = false) {
-    this.player.getInventory().wearItem(item, left)
+  onWear (item: Item, right: boolean = false) {
+    this.player.getInventory().wearItem(item, !right)
     this.game.save()
   }
 

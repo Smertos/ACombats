@@ -39,7 +39,7 @@ export class AppComponent {
 
   onUsernameSelect(username: string) {
     this.game.selectPlayer(username)
-    this.player = this.game.getPlayer(username)
+    this.player = this.game.getSelectedPlayer()
   }
 
 }

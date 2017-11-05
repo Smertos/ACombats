@@ -11,4 +11,6 @@ export class HealthBarComponent {
   @Input('player')
   player: Player
 
+  Math = Math
+
 }

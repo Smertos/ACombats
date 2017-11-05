@@ -1,3 +1,6 @@
 export enum BodyPart {
-  Head, Body, Waist, Legs
+  Head = 'head',
+  Body = 'body',
+  Waist = 'waist',
+  Legs = 'legs'
 }

@@ -1,7 +1,5 @@
-import { ItemArmorStats } from './item-armor-stats'
-
 export interface ItemStats {
   health?: number,
-  armor?: ItemArmorStats,
+  armor?: number,
   damage?: number
 }

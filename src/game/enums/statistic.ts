@@ -1,3 +1,5 @@
 export enum Statistic {
-  Strength, Agility, Intelligence, Stamina
+  Damage = 'damage',
+  Health = 'health',
+  Defence = 'defence'
 }

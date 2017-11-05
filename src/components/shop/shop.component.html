@@ -7,7 +7,7 @@
     <th style="border: 0;"></th>
   </tr>
   <tr *ngFor="let item of game.getShop().getItems()">
-    <td><span class="item-name">{{ item.name }}</span></td>
+    <td [item]="item"><span class="item-name">{{ item.name }}</span></td>
     <td><span class="item-price">{{ item.price }}g</span></td>
     <td><button class="item-buy" (click)="onBuy(item)">Buy</button></td>
   </tr>

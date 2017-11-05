@@ -1,4 +1,5 @@
 <div class="bar">
-  <p>{{ player.getCurrentHealth() }} / {{ player.getMaxHealth() }}</p>
-  <div class="progress" style.width="{{ (player.getCurrentHealth() / player.getMaxHealth()) * 100 }}%"></div>
+  <div class="progress" style.width="{{ (player.getCurrentHealth() / player.getMaxHealth()) * 100 }}%">
+    <p>{{ Math.floor(player.getCurrentHealth()) }} / {{ Math.floor(player.getMaxHealth()) }} HP</p>
+  </div>
 </div>
