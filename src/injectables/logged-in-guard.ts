@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { CanActivate } from '@angular/router'
-import { Player } from '../game/player'
+
 import { GameService } from './game.service'
 
 @Injectable()

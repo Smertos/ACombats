@@ -1,6 +1,9 @@
 import { Component, Input, HostListener } from '@angular/core'
+
 import { ItemTooltipService } from '../../injectables/item-tooltip.service'
 import { Item } from '../../game/interfaces/item'
+
+import { capitalize } from '../../utils/capitalize'
 
 @Component({
   selector: 'item-tooltip',
@@ -13,8 +16,6 @@ export class ItemTooltipComponent {
 
   constructor (private itemService: ItemTooltipService) {}
 
-  capitalize (word: string): string {
-    return word[0].toUpperCase() + word.slice(1).toLowerCase()
-  }
+  capitalize = capitalize
 
 }

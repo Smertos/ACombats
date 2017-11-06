@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core'
+
 import { Player } from '../../game/player'
 import { Equipped } from '../../game/interfaces/equipped'
 
@@ -11,7 +12,6 @@ export class PlayerComponent {
 
   __player: Player
   equipped: Equipped
-
 
   @Input('player')
   set player (player: Player) {

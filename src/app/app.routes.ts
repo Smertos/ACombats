@@ -1,9 +1,10 @@
-import { Routes }  from '@angular/router'
+import { Routes }             from '@angular/router'
 
 import { FightComponent }     from '../components/fight/fight.component'
 import { InventoryComponent } from '../components/inventory/inventory.component'
+import { QuickHelpComponent } from '../components/quick-help/quick-help.component'
 import { ShopComponent }      from '../components/shop/shop.component'
-import { LoggedInGuard }  from '../injectables/logged-in-guard'
+import { LoggedInGuard }      from '../injectables/logged-in-guard'
 
 export const appRoutes: Routes = [
   {
@@ -22,8 +23,12 @@ export const appRoutes: Routes = [
     canActivate: [LoggedInGuard]
   },
   {
-    path: '',
-    redirectTo: '/backpack',
-    pathMatch: 'full'
+    path: 'home',
+    component: QuickHelpComponent,
+    canActivate: [LoggedInGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/home'
   }
 ]

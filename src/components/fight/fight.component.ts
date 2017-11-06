@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core'
 import { Router } from '@angular/router'
-import { GameService } from '../../injectables/game.service'
-import { BodyPart } from '../../game/enums/body-part'
+
 import { Player } from '../../game/player'
 import { Fight } from '../../game/fight'
+import { BodyPart } from '../../game/enums/body-part'
+
+import { GameService } from '../../injectables/game.service'
 
 @Component({
   selector: 'fight',
@@ -13,9 +15,10 @@ import { Fight } from '../../game/fight'
 export class FightComponent {
 
   player: Player
-  enemy: Player
+  enemy:  Player
 
   fight: Fight
+  fightLog:   string[] = ['Fight has been started']
 
   attackPart: BodyPart
   defendPart: BodyPart
@@ -28,14 +31,17 @@ export class FightComponent {
     this.enemy = Fight.getRandomEnemy(this.player.getLevel())
 
     this.fight = new Fight(this.player, this.enemy)
-    this.fight.subscribe((winner, looser) => {
-      alert(`
-        ${winner.name} won!
-        ${looser.getLevel() * 5} EXP acquired
-      `)
-
+    this.fight.onFightLog(msg => {
+      console.log(msg)
+      this.fightLog.push(
+        msg
+          .replace(this.player.getName(), `<b>${this.player.getName()}</b>`)
+          .replace(this.enemy.getName(), `<b>${this.enemy.getName()}</b>`)
+      )
+    })
+    this.fight.onFightFinish((winner, looser) => {
       this.game.save()
-      this.router.navigate(['/'])
+      //this.router.navigate(['/'])
     })
   }
 

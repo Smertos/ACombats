@@ -1,27 +1,31 @@
 import { Inventory } from './inventory'
-import { PlayerStats } from './interfaces/player-stats'
 import { BodyPart } from './enums/body-part'
 import { Statistic } from './enums/statistic'
+import { PlayerStats } from './interfaces/player-stats'
 
 const {
-  baseHealth, baseArmor,
-  healthPerLevel, healthPerStatPoint,
+  baseHealth,
+  baseArmor,
   expirienceBase,
-  expirienceScaleFactor, levelCap,
-  unarmedDamage, statPointsInitial,
-  statPointsPerLevel
+  expirienceScaleFactor,
+  healthPerLevel,
+  healthPerStatPoint,
+  levelCap,
+  statPointsInitial,
+  statPointsPerLevel,
+  unarmedDamage
 } = require('../../gamedata.json')
 
 export class Player {
 
   inventory: Inventory = new Inventory()
 
-  maximumHealth: number = baseHealth
-  currentHealth: number = baseHealth
-  inFight: boolean = false
-  level: number = 1
-  expirience: number = 0
-  expToNextLevel: number = expirienceBase
+  maximumHealth:  number  = baseHealth
+  currentHealth:  number  = baseHealth
+  inFight:        boolean = false
+  level:          number  = 1
+  expirience:     number  = 0
+  expToNextLevel: number  = expirienceBase
  
   statistics: PlayerStats = {
     damage: 1,
@@ -73,10 +77,10 @@ export class Player {
   
   getAttackDamage (): number { 
     return (
-      this.getInventory().equipped.weapon ?
-      this.getInventory().equipped.weapon.stats.damage
-      : unarmedDamage
-    ) * Math.log10(this.statistics.damage + 9) * (this.level / 10)
+      this.getInventory().equipped.weapon
+      ? this.getInventory().equipped.weapon.getInfo().stats.damage
+      : unarmedDamage + this.statistics.damage
+    ) * Math.log10(this.statistics.damage + 9 + this.level / 2)
   }
 
   getDefenceForPart(part: BodyPart): number {
@@ -84,28 +88,30 @@ export class Player {
 
     switch (part) {
       case BodyPart.Head:
-        currentDefence += (this.inventory.equipped.helmet ? this.inventory.equipped.helmet.stats.armor : 1)
+        currentDefence += (this.inventory.equipped.helmet ? this.inventory.equipped.helmet.getInfo().stats.armor : 1)
+        currentDefence += (this.inventory.equipped.gloves ? this.inventory.equipped.gloves.getInfo().stats.armor : 1)
         break
 
       case BodyPart.Body:
-        currentDefence += (this.inventory.equipped.chestplate ? this.inventory.equipped.chestplate.stats.armor : 1)
+        currentDefence += (this.inventory.equipped.chestplate ? this.inventory.equipped.chestplate.getInfo().stats.armor : 1)
+        currentDefence += (this.inventory.equipped.gloves ? this.inventory.equipped.gloves.getInfo().stats.armor : 1)
         break
 
       case BodyPart.Waist:
-        currentDefence += (this.inventory.equipped.chestplate ? this.inventory.equipped.chestplate.stats.armor : 1) / 2
-        currentDefence += (this.inventory.equipped.pants ? this.inventory.equipped.pants.stats.armor : 1) / 2
+        currentDefence += (this.inventory.equipped.chestplate ? this.inventory.equipped.chestplate.getInfo().stats.armor : 1) / 2
+        currentDefence += (this.inventory.equipped.pants ? this.inventory.equipped.pants.getInfo().stats.armor : 1) / 2
         break
 
       case BodyPart.Legs:
-        currentDefence += (this.inventory.equipped.pants ? this.inventory.equipped.pants.stats.armor : 1) / 2
-        currentDefence += (this.inventory.equipped.boots ? this.inventory.equipped.boots.stats.armor : 1) / 2
+        currentDefence += (this.inventory.equipped.pants ? this.inventory.equipped.pants.getInfo().stats.armor : 1) / 2
+        currentDefence += (this.inventory.equipped.boots ? this.inventory.equipped.boots.getInfo().stats.armor : 1) / 2
         break
     }
 
     return currentDefence
   }
 
-  recieveDamage (damage: number): void {
+  receiveDamage (damage: number): void {
     this.currentHealth = Math.max(0, this.currentHealth - damage)
   }
 
@@ -113,8 +119,8 @@ export class Player {
     this.maximumHealth = baseHealth + (healthPerLevel * this.level) + (healthPerStatPoint * this.statistics.health)
 
     Object.keys(this.inventory.equipped).forEach(k => {
-      if (this.inventory.equipped[k].stats.health) {
-        this.maximumHealth += this.inventory.equipped[k].stats.health
+      if (this.inventory.equipped[k].getInfo().stats.health) {
+        this.maximumHealth += this.inventory.equipped[k].getInfo().stats.health
       }
     })
 

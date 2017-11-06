@@ -1,5 +1,5 @@
-import { Item } from './interfaces/item'
 import { ItemType } from './enums/item-type'
+import { Item } from './interfaces/item'
 import { Equipped } from './interfaces/equipped'
 
 const inventorySizeLimit = 50
@@ -25,7 +25,7 @@ export class Inventory {
     return false
   }
 
-  addGold (amount: number) {
+  addGold (amount: number): void {
     if (goldLimit <= 0) {
       this.gold += amount
     } else {
@@ -55,28 +55,22 @@ export class Inventory {
     return result[0]
   }
 
-  wearItem (item: Item, left: boolean = false) {
-    let oldItem: Item = this.equipped[item['type']]
+  wearItem (item: Item, left: boolean = false): void {
+    let oldItem: Item = this.equipped[item.getInfo()['type']]
 
     if (oldItem) {
       this.addItem(oldItem)
     }
 
-    if (Object.values(ItemType).indexOf(item['type']) !== -1) {
-      if (item['type'] === ItemType.Ring) {
-        if (left) {
-          var kind = 'leftRing'
-        } else {
-          var kind = 'rightRing'
-        }
-
-        this.equipped[kind] = item
+    if (Object.values(ItemType).indexOf(item.getInfo()['type']) !== -1) {
+      if (item.getInfo()['type'] === ItemType.Ring) {
+        this.equipped[left ? 'leftRing' : 'rightRing'] = item
       } else {
-        this.equipped[item['type']] = item 
+        this.equipped[item.getInfo()['type']] = item 
       }
-    }
 
-    this.removeItem(item.uid)
+      this.removeItem(item.uid)
+    }
   }
 
 }

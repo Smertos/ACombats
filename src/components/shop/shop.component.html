@@ -3,12 +3,14 @@
 <table class="price-list">
   <tr>
     <th>Name</th>
+    <th>Type</th>
     <th><img src="assets/gold.png" alt="Gold"></th>
     <th style="border: 0;"></th>
   </tr>
-  <tr *ngFor="let item of game.getShop().getItems()">
-    <td [item]="item"><span class="item-name">{{ item.name }}</span></td>
-    <td><span class="item-price">{{ item.price }}g</span></td>
-    <td><button class="item-buy" (click)="onBuy(item)">Buy</button></td>
+  <tr *ngFor="let itemInfo of Shop.getItems()">
+    <td [item]="item"><span class="item-name">{{ itemInfo.name }}</span></td>
+    <td>{{ capitalize(itemInfo.type) }}</td>
+    <td><span class="item-price">{{ itemInfo.price }}g</span></td>
+    <td><button class="item-buy" (click)="onBuy(itemInfo)">Buy</button></td>
   </tr>
 </table>

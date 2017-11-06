@@ -4,28 +4,33 @@
   <player [player]="player"></player>
 
   <form class="actions" (submit)="onSubmit($event)">
-    <div class="column-attack">
-      <p>Attack:</p>
+    <div class="no-idea-how-to-name-this-class">
+      <div class="column-attack">
+        <p>Attack:</p>
 
-      <div *ngFor="let part of Object.keys(BodyPart)">
-        <input type="radio" name="attack" value="{{ part }}" [(ngModel)]="attackPart" />
-        <label>{{ part }}</label>
+        <div *ngFor="let part of Object.keys(BodyPart)">
+          <input type="radio" name="attack" value="{{ part }}" [(ngModel)]="attackPart" />
+          <label>{{ part }}</label>
+        </div>
+
       </div>
 
-    </div>
+      <div class="column-defence">
+        <p>Defend:</p>
 
-    <div class="column-defence">
-      <p>Defend:</p>
+        <div *ngFor="let part of Object.keys(BodyPart)">
+          <input type="radio" name="defend" value="{{ part }}" [(ngModel)]="defendPart" />
+          <label>{{ part }}</label>
+        </div>
 
-      <div *ngFor="let part of Object.keys(BodyPart)">
-        <input type="radio" name="defend" value="{{ part }}" [(ngModel)]="defendPart" />
-        <label>{{ part }}</label>
       </div>
-
     </div>
 
-    <input type="submit" value="Make a turn">
+    <input type="submit" value="Make a turn" [disabled]="fight.isFightFinished">
   </form>
 
   <player [player]="enemy"></player>
 </div>
+<ul class="battle-log">
+  <li *ngFor="let msg of fightLog" [innerHTML]="msg"></li>
+</ul>

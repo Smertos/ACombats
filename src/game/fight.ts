@@ -5,53 +5,75 @@ const { enemyName, levelCap, defenceFactor } = require('../../gamedata.json')
 
 export class Fight {
 
-  onFightEnd: Function
+  isFightFinished: boolean = false
+  finishCallback:  Function
+  logCallback:     Function
 
   constructor (private player: Player, private enemy: Player) {
     this.player.inFight = true
     this.enemy.inFight = true
   }
 
-  subscribe (callback: Function) {
-    this.onFightEnd = callback
+  onFightFinish (callback: Function): void {
+    this.finishCallback = callback
   }
 
-  makeTurn (attackPart: BodyPart, defencePart: BodyPart) {
-    let enemyAttack: BodyPart = <BodyPart>Object.keys(BodyPart)[randomRange(0, 3)] 
+  onFightLog (callback: Function): void {
+    this.logCallback = callback
+  }
+
+  makeTurn (attackPart: BodyPart, defencePart: BodyPart): void {
+    let enemyAttack:  BodyPart = <BodyPart>Object.keys(BodyPart)[randomRange(0, 3)] 
     let enemyDefence: BodyPart = <BodyPart>Object.keys(BodyPart)[randomRange(0, 3)]
 
-    let playerAttackDamage = this.getSpreadedDamage(this.player)
-    let enemyAttackDamage = this.getSpreadedDamage(this.enemy)
+    let playerAttackDamage = Fight.getSpreadedDamage(this.player)
+    let enemyAttackDamage  = Fight.getSpreadedDamage(this.enemy)
 
-    let playerDamage = playerAttackDamage * (attackPart === enemyDefence ? defenceFactor : 1) * this.getDamageReduction(this.enemy, attackPart)
-    let enemyDamage = enemyAttackDamage * (defencePart === enemyAttack ? defenceFactor : 1) * this.getDamageReduction(this.player, enemyAttack)
+    let playerDamage = playerAttackDamage * (attackPart === enemyDefence ? defenceFactor : 1) * Fight.getDamageReduction(this.enemy, attackPart)
+    let enemyDamage  = enemyAttackDamage  * (defencePart === enemyAttack ? defenceFactor : 1) * Fight.getDamageReduction(this.player, enemyAttack)
 
-    this.player.recieveDamage(enemyDamage)
-    this.enemy.recieveDamage(playerDamage)
+    this.player.receiveDamage(enemyDamage)
+    this.enemy.receiveDamage(playerDamage)
+
+    this.logCallback && this.logCallback(`${this.player.getName()} attacks ${this.enemy.getName()} in ${attackPart} and deals ${Math.floor(playerDamage)} damage`)
+    this.logCallback && this.logCallback(`${this.enemy.getName()} attacks ${this.player.getName()} in ${enemyAttack} and deals ${Math.floor(enemyDamage)} damage`)
 
     if (this.enemy.getCurrentHealth() < 1) {
       this.endFight(this.player, this.enemy)
     } else if(this.player.getCurrentHealth() < 1) {
       this.endFight(this.enemy, this.player)
     }
-  }
+  } 
 
-  getSpreadedDamage (attacker: Player): number {
-    return Math.max(1, randomRange(attacker.getAttackDamage() - attacker.getLevel(), attacker.getAttackDamage() + attacker.getLevel()))
-  }
+  endFight (winner: Player, looser: Player): void {
+    this.isFightFinished = true
 
-  getDamageReduction (target: Player, part: BodyPart): number {
-    return 1 - (Math.log10(target.getDefenceForPart(part)) * 10 / 100)
-  }
-
-  endFight (winner: Player, looser: Player) {
     this.player.inFight = false
     this.player.updateHealth()
 
     // Make better formula for expirience? :thinking:
-    this.player.addExpirience(this.enemy.getLevel() * (this.player === winner ? 5 : 2.5))
+    let exp = this.enemy.getLevel() * (this.player === winner ? 5 : 2.5)
+    let gold = this.enemy.getLevel() * (this.player === winner ? 10 : 2.5)
+    this.player.addExpirience(exp)
+    this.player.getInventory().addGold(gold)
 
-    this.onFightEnd && this.onFightEnd(winner, looser)
+    this.log(`${winner.getName()} won!`)
+    this.log(`${Math.floor(exp)} EXP aquired`)
+    this.log(`${Math.floor(gold)} gold found`)
+
+    this.finishCallback && this.finishCallback(winner, looser)
+  }
+
+  log (msg: string): void {
+    this.logCallback && this.logCallback(msg)
+  }
+
+  static getSpreadedDamage (attacker: Player): number {
+    return Math.max(1, randomRange(attacker.getAttackDamage() - attacker.getLevel(), attacker.getAttackDamage() + attacker.getLevel()))
+  }
+
+  static getDamageReduction (target: Player, part: BodyPart): number {
+    return 1 - (Math.log10(target.getDefenceForPart(part)) * 10 / 100)
   }
 
   static getRandomEnemy (playerLevel: number): Player {

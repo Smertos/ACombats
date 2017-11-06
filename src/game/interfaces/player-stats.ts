@@ -1,6 +1,5 @@
-
 export interface PlayerStats {
-  damage: number,
-  health: number,
+  damage:  number,
   defence: number
+  health:  number,
 }

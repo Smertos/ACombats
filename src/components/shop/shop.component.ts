@@ -1,7 +1,11 @@
 import { Component } from '@angular/core'
+
 import { Shop } from '../../game/shop'
 import { Item } from '../../game/interfaces/item'
+import { ItemInfo } from '../../game/interfaces/item-info'
+
 import { GameService } from '../../injectables/game.service'
+import { capitalize } from '../../utils/capitalize'
 
 @Component({
   selector: 'shop',
@@ -10,6 +14,9 @@ import { GameService } from '../../injectables/game.service'
 })
 export class ShopComponent {
 
+  Shop = Shop
+  capitalize = capitalize
+
   constructor (public game: GameService) {
     let player = this.game.getSelectedPlayer()
 
@@ -17,11 +24,9 @@ export class ShopComponent {
     player.updateHealth()
   }
 
-  onBuy (item: Item) {
-    const shop: Shop = this.game.getShop()
-    
-    if (!shop.buy(this.game.getSelectedPlayer(), item)) {
-      alert(`Can't buy ${item.name}: Not enough gold`)  
+  onBuy (itemInfo: ItemInfo) {
+    if (!Shop.buy(this.game.getSelectedPlayer(), itemInfo)) {
+      alert(`Can't buy ${itemInfo.name}: Not enough gold`)  
     } else {
       this.game.save()
     }

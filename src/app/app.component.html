@@ -7,15 +7,15 @@
   <div class="gold">
     <img src="assets/gold.png" alt="Gold" (click)="cheatsOn = !cheatsOn">
     <span>{{ player.getInventory()?.getGold() || "0" }}</span>
-    <button (click)="player.getInventory().addGold(100)" *ngIf="cheatsOn">+</button>
-    <button (click)="player.levelUp()" *ngIf="cheatsOn">^</button>
+    <button (click)="player.getInventory().addGold(100)" *ngIf="cheatsOn">+100g</button>
+    <button (click)="player.addExpirience(100)" *ngIf="cheatsOn">+100EXP</button>
   </div>
 </div>
 
 <router-outlet><router-outlet>
 
 <form class="login" *ngIf="!player" (submit)="onUsernameSelect(username.value)">
-  <label>Challenger, name yourself:</label>
+  <h1>Challenger, name yourself</h1>
   <input
     #username type="text" placeholder="Player Name"
     pattern="^[a-zA-Z][a-zA-Z0-9]{5,}$"

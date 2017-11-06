@@ -1,13 +1,13 @@
 <div class="tooltip" *ngIf="itemService.item">
-  <p class="name" style.border="1px solid item.color">{{ itemService.item.name }}</p>
-  <p>Type: {{ capitalize(itemService.item.type) }}</p>
-  <p>Price: {{ itemService.item.price }}g</p>
+  <p class="name" style.border="1px solid item.color">{{ itemService.item.getInfo().name }}</p>
+  <p>Type: {{ capitalize(itemService.item.getInfo().type) }}</p>
+  <p>Price: {{ itemService.item.getInfo().price }}g</p>
 
   <table>
     <th>Statistics</th>
-    <tr *ngFor="let key of Object.keys(itemService.item.stats)">
+    <tr *ngFor="let key of Object.keys(itemService.item.getInfo().stats)">
       <td>{{ capitalize(key) }}:</td>
-      <td>{{ itemService.item.stats[key] }}</td>
+      <td>{{ itemService.item.getInfo().stats[key] }}</td>
     </tr>
   </table>
 </div>

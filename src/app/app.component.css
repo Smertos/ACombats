@@ -1,3 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  font-family: 'PT Sans', sans-serif;
+}
+
+:host > router-outlet {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 
 .navbar {
   display: flex;
@@ -58,6 +70,10 @@
   color: #222;
 }
 
+.gold > button {
+  margin-left: 0.5em;
+}
+
 .login {
   display: flex;
   flex-direction: column;
@@ -70,4 +86,8 @@
 
 .login * {
   margin-bottom: 0.25em;
+}
+
+.login > h1 {
+  text-align: center;
 }

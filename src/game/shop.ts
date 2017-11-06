@@ -1,22 +1,25 @@
-import { Item } from './interfaces/item'
-import { ItemType } from './enums/item-type'
+import nanoid from 'nanoid'
+
 import { Player } from './player'
 import { Inventory } from './inventory'
-import { SHA256 } from 'crypto-js'
-import nanoid from 'nanoid'
+import { Item } from './interfaces/item'
+import { ItemInfo } from './interfaces/item-info'
 
 const { itemSellRate, items } = require('../../gamedata.json')
 
 export class Shop {
-  
-  buy (player: Player, item: Item): boolean {
-    let inventory = player.getInventory()
 
-    if (inventory.removeGold(item.price)) {
-      inventory.addItem(Object.assign({ 
+  static buy (player: Player, itemInfo: ItemInfo): boolean {
+    let inventory: Inventory = player.getInventory()
+
+    if (inventory.removeGold(itemInfo.price)) {
+      let item: Item = { 
+        id: itemInfo.id,
         uid: nanoid(),
-        color: SHA256(item.name).toString().slice(0, 6)
-      }, item))
+        getInfo: () => itemInfo 
+      }
+
+      inventory.addItem(item)
 
       return true
     }
@@ -24,18 +27,18 @@ export class Shop {
     return false
   }
 
-  getSellPrice (item: Item): number {
-    return Math.round(item.price * itemSellRate)
+  static getSellPrice (itemInfo: ItemInfo): number {
+    return Math.round(itemInfo.price * itemSellRate)
   }
 
-  sellItem (inventory: Inventory, item: Item) {
-    let price = this.getSellPrice(item)
+  static sellItem (inventory: Inventory, item: Item): void {
+    let price = this.getSellPrice(item.getInfo())
 
     inventory.removeItem(item.uid)
     inventory.addGold(price)
   }
 
-  getItems (): Item[] {
+  static getItems (): Item[] {
     return items
   }
 

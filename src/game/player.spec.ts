@@ -1,6 +1,5 @@
 import { Player } from './player'
 
-
 describe('Player', () => {
 
   it('should have LVL 1', () => {

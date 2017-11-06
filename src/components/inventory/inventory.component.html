@@ -39,15 +39,17 @@
 
 <table class="item-list">
   <tr>
-    <th>Item Name</th>
+    <th>Name</th>
+    <th>Type</th>
     <th>Sell Price</th>
   </tr>
   <tr *ngFor="let item of player.getInventory().getItems()">
-    <td [item]="item">{{ item.name }}</td>
-    <td>{{ game.getShop().getSellPrice(item) }}g</td>
+    <td [item]="item">{{ item.getInfo().name }}</td>
+    <td>{{ capitalize(item.getInfo()['type']) }}</td>
+    <td>{{ Shop.getSellPrice(item.getInfo()) }}g</td>
     <td>
-      <button (click)="onWear(item)">Wear {{ item.type === 'ring' ? '(Left)': '' }}</button>
-      <button (click)="onWear(item, true)" *ngIf="item.type === 'ring'">Wear (Right)</button>
+      <button (click)="onWear(item)">Wear {{ item.getInfo().type === 'ring' ? '(Left)': '' }}</button>
+      <button (click)="onWear(item, true)" *ngIf="item.getInfo().type === 'ring'">Wear (Right)</button>
     </td>
     <td>
       <button (click)="onSell(item)">Sell</button>

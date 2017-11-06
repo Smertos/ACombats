@@ -1,5 +1,5 @@
 export interface ItemStats {
-  health?: number,
-  armor?: number,
+  armor?:  number,
   damage?: number
+  health?: number,
 }
