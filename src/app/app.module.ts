@@ -8,6 +8,7 @@ import {
 }                               from '@angular/common'
 import { FormsModule }          from '@angular/forms'
 import { RouterModule }         from '@angular/router'
+import { NgxAutoScroll }        from 'ngx-auto-scroll/lib/ngx-auto-scroll.directive'
 
 import { AppComponent }         from './app.component'
 import { FightComponent }       from '../components/fight/fight.component'
@@ -37,7 +38,8 @@ import { ItemTooltipService }   from '../injectables/item-tooltip.service'
     ShopComponent,
     SlotComponent,
     ItemTooltipComponent,
-    ItemTooltipDirective
+    ItemTooltipDirective,
+    NgxAutoScroll
   ],
   imports: [
     BrowserModule,

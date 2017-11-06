@@ -31,6 +31,6 @@
 
   <player [player]="enemy"></player>
 </div>
-<ul class="battle-log">
+<ul class="battle-log" ngx-auto-scroll observe-attributes>
   <li *ngFor="let msg of fightLog" [innerHTML]="msg"></li>
 </ul>

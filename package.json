@@ -25,6 +25,7 @@
     "class-transformer": "^0.1.8",
     "core-js": "^2.4.1",
     "nanoid": "^1.0.1",
+    "ngx-auto-scroll": "^1.0.15",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
