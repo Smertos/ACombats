@@ -20,6 +20,7 @@ export class Fight {
 
   onFightLog (callback: Function): void {
     this.logCallback = callback
+    this.log('Fight has been started')
   }
 
   makeTurn (attackPart: BodyPart, defencePart: BodyPart): void {
@@ -38,30 +39,37 @@ export class Fight {
     this.logCallback && this.logCallback(`${this.player.getName()} attacks ${this.enemy.getName()} in ${attackPart} and deals ${Math.floor(playerDamage)} damage`)
     this.logCallback && this.logCallback(`${this.enemy.getName()} attacks ${this.player.getName()} in ${enemyAttack} and deals ${Math.floor(enemyDamage)} damage`)
 
-    if (this.enemy.getCurrentHealth() < 1) {
+    if(this.enemy.getCurrentHealth() < 1 && this.player.getCurrentHealth() < 1) {
+      this.endFight(null, null, true)
+    } else if (this.enemy.getCurrentHealth() < 1) {
       this.endFight(this.player, this.enemy)
     } else if(this.player.getCurrentHealth() < 1) {
       this.endFight(this.enemy, this.player)
     }
   } 
 
-  endFight (winner: Player, looser: Player): void {
+  endFight (winner: Player, looser: Player, isDraw: boolean = false): void {
     this.isFightFinished = true
 
     this.player.inFight = false
     this.player.updateHealth()
 
-    // Make better formula for expirience? :thinking:
-    let exp = this.enemy.getLevel() * (this.player === winner ? 5 : 2.5)
-    let gold = this.enemy.getLevel() * (this.player === winner ? 10 : 2.5)
-    this.player.addExpirience(exp)
-    this.player.getInventory().addGold(gold)
+    if (isDraw) {
+      this.log('Both players died at the same turn')
+      this.log('It\'s a draw!')
+    } else {
+      // Make better formula for expirience? :thinking:
+      let exp  = this.enemy.getLevel() * (this.player === winner ? 5  : 2.5)
+      let gold = this.enemy.getLevel() * (this.player === winner ? 10 : 2.5)
+      
+      this.player.addExpirience(exp)
+      this.player.getInventory().addGold(gold)
 
-    this.log(`${winner.getName()} won!`)
-    this.log(`${Math.floor(exp)} EXP aquired`)
-    this.log(`${Math.floor(gold)} gold found`)
-
-    this.finishCallback && this.finishCallback(winner, looser)
+      this.log(`${winner.getName()} won!`)
+      this.log(`${Math.floor(exp)} EXP aquired`)
+      this.log(`${Math.floor(gold)} gold found`)
+    }
+    this.finishCallback && this.finishCallback(winner, looser, isDraw)
   }
 
   log (msg: string): void {
@@ -79,12 +87,12 @@ export class Fight {
   static getRandomEnemy (playerLevel: number): Player {
     let enemy = new Player(enemyName, randomRange(
       Math.max(playerLevel - 2, 1),
-      Math.min(playerLevel + 2, levelCap <= 0 ? Infinity : levelCap)
+      Math.min(playerLevel + 1, levelCap <= 0 ? Infinity : levelCap)
     ))
 
-    enemy.statistics.damage = randomRange(1, enemy.getLevel() * 4)
+    enemy.statistics.damage  = randomRange(1, enemy.getLevel() * 4)
     enemy.statistics.defence = randomRange(1, enemy.getLevel() * 5)
-    enemy.statistics.health = randomRange(1, enemy.getLevel() * 8)
+    enemy.statistics.health  = randomRange(1, enemy.getLevel() * 8)
 
     return enemy
   }

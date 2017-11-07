@@ -18,7 +18,7 @@ export class FightComponent {
   enemy:  Player
 
   fight: Fight
-  fightLog:   string[] = ['Fight has been started']
+  fightLog:   string[] = []
 
   attackPart: BodyPart
   defendPart: BodyPart
@@ -41,7 +41,6 @@ export class FightComponent {
     })
     this.fight.onFightFinish((winner, looser) => {
       this.game.save()
-      //this.router.navigate(['/'])
     })
   }
 
